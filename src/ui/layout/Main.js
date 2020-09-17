@@ -1,4 +1,5 @@
 import React from 'react'
+import {connect} from 'react-redux'
 
 const Main=({contador,aumentarContador,resetearContador,restarContador}) =>
       <main>
@@ -10,4 +11,6 @@ const Main=({contador,aumentarContador,resetearContador,restarContador}) =>
       </main>
 
 
-export default Main
+export default connect(
+  ({contador})=>({contador})
+  )(Main)

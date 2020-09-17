@@ -1,0 +1,22 @@
+yo hice esta onChange={(e)=>handleChangeDataForm(e,"nombre")}
+  handleChangeDataForm = (e, prop) => {
+    let data = e.target.value;
+    this.setState({
+      form: {
+        ...this.state.form,
+        [prop]: data,
+      },
+    });
+  };
+
+
+manejarCambioAtributo = (atributo, e) => {
+    let atributoTemp = e.target.value
+
+    this.setState({
+      form: {
+        ...this.state.form,
+        [atributo]: atributoTemp
+      }
+    })
+  }

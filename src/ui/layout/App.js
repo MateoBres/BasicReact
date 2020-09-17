@@ -2,7 +2,7 @@ import React from 'react'
 import Header from './Header'
 import Main from './Main'
 import Footer from './Footer'
-import Usuarios from './Usuarios'
+import Usuarios from '../componentes/Usuarios'
 
 class App extends React.Component{
 
@@ -10,13 +10,13 @@ class App extends React.Component{
     super()
     this.state = {
         contador : 0,
-        links:['usuarios', 'productos', 'contacto'],
         form : {
           nombre:'',
-          apellido:''
+          apellido:'',
+          editar : -1
         },
         usuarios:[],
-        editar : -1,
+        
     }
 }
 
@@ -35,25 +35,33 @@ borrarUsuario=(i)=>{
 editarUsuario=(i)=>{
   this.setState({
     form:{
-    nombre :this.state.usuarios[i].nombre,
-    apellido:this.state.usuarios[i].apellido
-    },
-    editar: i,
+      nombre :this.state.usuarios[i].nombre,
+      apellido:this.state.usuarios[i].apellido,
+      editar: i
+    }
   })
 }
 
 
 manejarElSubmit=(e)=>{
   e.preventDefault()
-  if(this.state.editar>=0){
-    this.state.usuarios.splice(this.state.editar, 1, this.state.form)
+  if(this.state.form.editar>=0){
+    let start = this.state.usuarios.slice(0, this.state.form.editar)
+    let end = this.state.usuarios.slice(this.state.form.editar+1)
+    let usuarioModificado = this.state.form
+    let nuevos_usuarios = [
+      ...start,
+      usuarioModificado,
+      ...end
+    ]
     this.setState({
-      usuarios : this.state.usuarios,
+      usuarios : nuevos_usuarios,
       form:{
         nombre:'',
         apellido:'',
+        editar : -1
       },
-      editar : -1
+      
     })
   } else {
       this.setState({
@@ -64,27 +72,23 @@ manejarElSubmit=(e)=>{
         form:{
           nombre:'',
           apellido:'',
+          editar : -1
         }
       })
     }
 }
 
+
+
 manejarCambioNombre=(e)=>{
-  if(e.target.placeholder === 'nombre'){
-    this.setState({ 
-      form : { 
-          ...this.state.form,
-          nombre : e.target.value
-      } 
-    })
-  }else{
   this.setState({ 
-    form : { 
-        ...this.state.form,
-        apellido : e.target.value
-    } 
-  })
-}}
+   form : { 
+       ...this.state.form,
+       [e.target.dataset.target] : e.target.value
+   } 
+ })
+}
+
 
 aumentarContador=()=>{this.setState({contador: this.state.contador+1})}
 
@@ -93,9 +97,9 @@ restarContador=()=>{this.setState({contador: this.state.contador-1})}
 resetearContador=()=>{this.setState({contador: 0})}
 
 render(){
-  let {contador, links, form, usuarios} = this.state
+  let {contador, form, usuarios} = this.state
     return <>
-            <Header links={links}/>
+            <Header/>
             <Main 
               contador={contador}
               aumentarContador={this.aumentarContador}
@@ -108,7 +112,6 @@ render(){
                 usuarios={usuarios}
                 manejarElSubmit={this.manejarElSubmit}
                 manejarCambioNombre={this.manejarCambioNombre}
-                // manejarCambioApellido={this.manejarCambioApellido}
                 borrarUsuario={this.borrarUsuario}
                 editarUsuario={this.editarUsuario}
             />

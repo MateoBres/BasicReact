@@ -5,10 +5,10 @@ const Usuarios = ({nombre, apellido, usuarios, manejarElSubmit, manejarCambioNom
     <>
         <form onSubmit={manejarElSubmit}>
             <div>
-                <input onChange={manejarCambioNombre} type="text" placeholder='nombre' value={nombre}/>
+                <input data-target='nombre' onChange={manejarCambioNombre} type="text" placeholder='nombre' value={nombre}/>
             </div>
             <div>
-                <input onChange={manejarCambioNombre} type="text" placeholder='apellido'value={apellido}/>
+                <input data-target='apellido' onChange={manejarCambioNombre} type="text" placeholder='apellido'value={apellido}/>
             </div>
             <button>Guardar</button>
         </form>

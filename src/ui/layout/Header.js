@@ -1,4 +1,5 @@
 import React from 'react'
+import {connect} from 'react-redux'
 
 const Header = ({links}) =>
       <header>
@@ -8,5 +9,4 @@ const Header = ({links}) =>
           </nav>
       </header>
 
-
-export default Header
+export default connect(({links})=>({links}))(Header)
