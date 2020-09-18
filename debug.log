@@ -15,3 +15,4 @@
 [0911/233306.301:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
 [0911/233306.301:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
 [0911/233306.301:ERROR:exception_snapshot_win.cc(99)] thread ID 5136 not found in process
+[0918/191446.444:ERROR:registration_protocol_win.cc(103)] CreateFile: The system cannot find the file specified. (0x2)
